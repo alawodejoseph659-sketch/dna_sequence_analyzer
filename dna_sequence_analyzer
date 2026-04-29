@@ -1,0 +1,42 @@
+#DNA sequence analyzer
+print("WELCOME TO THE DNA SEQUENCE ANALYZER")
+seq1=input("Enter your first DNA sequence please")
+seq2=input("Enter your second DNA sequence please")
+seq1=seq1.upper()
+seq2=seq2.upper()
+def confirm(seq):
+    valid=["A","T","G","C"]
+    for base in seq:
+        if base not in valid:
+            return False
+    return True
+def compare(seq1,seq2):
+    match=0
+    mutation=0
+    for i in range(len(seq1)):
+        if seq1[i]==seq2[i]:
+            match+=1
+        print("Match at position", i+1, ":", seq1[i], "=", seq2[i])   
+    else:
+            mutation+=1
+            print("Mutation at position",i+1,":",seq1[i],"-",seq2[i])
+    identity=(match/len(seq1))*100
+    print("\nSUMMARY")
+    print("Total matches:", match)
+    print("Total mutations:", mutation)
+    return identity
+def GC_content(seq):
+    A=seq.count("A")
+    T=seq.count("T")
+    G=seq.count("G")
+    C=seq.count("C")
+    return((G+C)/len(seq)) * 100
+if not confirm(seq1) or not confirm(seq2):
+    print("THIS DNA SEQUENCE INPUTED IS INVALID,TRY AGAIN!!")
+elif len(seq1)!=len(seq2):
+    print("THE LENGTH OF THE SEQUENCES ARE UNEQUAL,TRY AGAIN!!")
+else:
+    identity=compare(seq1,seq2)
+    print("Identity:",identity,"%")
+print("GC content for seq1:",GC_content(seq1),"%")
+print("GC content for seq2:",GC_content(seq2),"%")
